@@ -1,0 +1,6 @@
+{
+  "name": "Netaji Foundation",
+  "description": "Empowering local communities through sustainable development, education, health initiatives, and absolute financial transparency.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
