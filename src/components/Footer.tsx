@@ -1,13 +1,36 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
 import { PageTab } from '../types';
 import { ShieldCheck, Heart, Sprout } from 'lucide-react';
+import { useModal } from '../context/ModalContext';
 
 interface FooterProps {
-  setActiveTab: (tab: PageTab) => void;
-  openDonateModal: () => void;
+  setActiveTab?: (tab: PageTab) => void;
+  openDonateModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ setActiveTab, openDonateModal }) => {
+export const Footer: React.FC<FooterProps> = ({ setActiveTab: propSetActiveTab, openDonateModal: propOpenDonateModal }) => {
+  const modalContext = useModal();
+
+  const handleDonate = () => {
+    if (propOpenDonateModal) {
+      propOpenDonateModal();
+    } else {
+      modalContext.openDonateModal();
+    }
+  };
+
+  const handleScroll = (tab?: PageTab) => {
+    if (propSetActiveTab && tab) {
+      propSetActiveTab(tab);
+    }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="w-full bg-[#f1f4f9] border-t border-[#e0e3e8] mt-16 text-[#181c20]">
       <div className="max-w-[1200px] mx-auto px-4 md:px-10 py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -27,24 +50,24 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, openDonateModal })
           <h3 className="font-semibold text-sm text-[#012d1d] uppercase tracking-wider">Navigation</h3>
           <ul className="space-y-2 text-sm text-[#414844]">
             <li>
-              <button onClick={() => { setActiveTab('home'); window.scrollTo(0,0); }} className="hover:text-[#012d1d] cursor-pointer">
+              <Link href="/" onClick={() => handleScroll('home')} className="hover:text-[#012d1d] cursor-pointer">
                 Home Page
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={() => { setActiveTab('about'); window.scrollTo(0,0); }} className="hover:text-[#012d1d] cursor-pointer">
+              <Link href="/about" onClick={() => handleScroll('about')} className="hover:text-[#012d1d] cursor-pointer">
                 About Our Mission
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={() => { setActiveTab('campaigns'); window.scrollTo(0,0); }} className="hover:text-[#012d1d] cursor-pointer">
+              <Link href="/campaigns" onClick={() => handleScroll('campaigns')} className="hover:text-[#012d1d] cursor-pointer">
                 Active Campaigns
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={() => { setActiveTab('transparency'); window.scrollTo(0,0); }} className="hover:text-[#012d1d] cursor-pointer">
+              <Link href="/transparency" onClick={() => handleScroll('transparency')} className="hover:text-[#012d1d] cursor-pointer">
                 Financial Transparency
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
@@ -53,14 +76,14 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, openDonateModal })
           <h3 className="font-semibold text-sm text-[#012d1d] uppercase tracking-wider">Resources & Trust</h3>
           <ul className="space-y-2 text-sm text-[#414844]">
             <li>
-              <button onClick={() => { setActiveTab('transparency'); window.scrollTo(0,0); }} className="hover:text-[#012d1d] cursor-pointer">
+              <Link href="/transparency" onClick={() => handleScroll('transparency')} className="hover:text-[#012d1d] cursor-pointer">
                 Annual Financial Reports
-              </button>
+              </Link>
             </li>
             <li>
-              <button onClick={() => { setActiveTab('contact'); window.scrollTo(0,0); }} className="hover:text-[#012d1d] cursor-pointer">
+              <Link href="/contact" onClick={() => handleScroll('contact')} className="hover:text-[#012d1d] cursor-pointer">
                 Volunteer Portal
-              </button>
+              </Link>
             </li>
             <li>
               <span className="text-[#414844] hover:text-[#012d1d]">Privacy & Compliance Policy</span>
@@ -77,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab, openDonateModal })
             Every single donation is backed by strict financial transparency and audited impact statements.
           </p>
           <button
-            onClick={() => openDonateModal()}
+            onClick={handleDonate}
             className="w-full bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
           >
             <Heart className="w-4 h-4 text-[#a1f4c8] fill-[#a1f4c8]" />

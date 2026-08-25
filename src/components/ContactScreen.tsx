@@ -1,11 +1,14 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, UserPlus, ShieldCheck } from 'lucide-react';
+import { useModal } from '../context/ModalContext';
 
 interface ContactScreenProps {
-  openVolunteerModal: () => void;
+  openVolunteerModal?: () => void;
 }
 
-export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal }) => {
+export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal: propOpenVolunteerModal }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,6 +16,15 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
+  const modalContext = useModal();
+
+  const handleOpenVolunteer = () => {
+    if (propOpenVolunteerModal) {
+      propOpenVolunteerModal();
+    } else {
+      modalContext.openVolunteerModal();
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -225,7 +237,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
                 </p>
               </div>
               <button
-                onClick={openVolunteerModal}
+                onClick={handleOpenVolunteer}
                 className="bg-[#012d1d] text-white hover:bg-[#1b4332] font-bold text-xs py-2.5 px-4 rounded-xl transition-all cursor-pointer shrink-0 flex items-center gap-1.5"
               >
                 <UserPlus className="w-4 h-4" />

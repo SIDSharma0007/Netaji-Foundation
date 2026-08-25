@@ -1,12 +1,28 @@
+'use client';
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { PageTab } from '../types';
 import { Shield, Sprout, Heart, Users, ArrowRight } from 'lucide-react';
 
 interface AboutScreenProps {
-  setActiveTab: (tab: PageTab) => void;
+  setActiveTab?: (tab: PageTab) => void;
 }
 
-export const AboutScreen: React.FC<AboutScreenProps> = ({ setActiveTab }) => {
+export const AboutScreen: React.FC<AboutScreenProps> = ({ setActiveTab: propSetActiveTab }) => {
+  const router = useRouter();
+
+  const handleNavigate = (path: string, tab: PageTab) => {
+    if (propSetActiveTab) {
+      propSetActiveTab(tab);
+    } else {
+      router.push(path);
+    }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f7f9ff] text-[#181c20]">
       {/* Hero Header */}
@@ -122,7 +138,7 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ setActiveTab }) => {
             </h2>
             <div>
               <button
-                onClick={() => setActiveTab('campaigns')}
+                onClick={() => handleNavigate('/campaigns', 'campaigns')}
                 className="bg-white text-[#012d1d] hover:bg-[#cee9d3] font-bold text-sm px-6 py-3.5 rounded-lg transition-colors cursor-pointer shadow-md inline-flex items-center gap-2"
               >
                 <span>See Our Projects</span>

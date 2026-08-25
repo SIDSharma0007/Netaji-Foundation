@@ -1,14 +1,46 @@
+'use client';
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Campaign, PageTab } from '../types';
 import { Users, TrendingUp, CheckCircle, ArrowRight, Heart } from 'lucide-react';
+import { useModal } from '../context/ModalContext';
 
 interface HomeScreenProps {
-  campaigns: Campaign[];
-  setActiveTab: (tab: PageTab) => void;
-  openDonateModal: (campaignId?: string) => void;
+  campaigns?: Campaign[];
+  setActiveTab?: (tab: PageTab) => void;
+  openDonateModal?: (campaignId?: string) => void;
 }
 
-export const HomeScreen: React.FC<HomeScreenProps> = ({ campaigns, setActiveTab, openDonateModal }) => {
+export const HomeScreen: React.FC<HomeScreenProps> = ({
+  campaigns: propCampaigns,
+  setActiveTab: propSetActiveTab,
+  openDonateModal: propOpenDonateModal,
+}) => {
+  const router = useRouter();
+  const modalContext = useModal();
+
+  const campaigns = propCampaigns || modalContext.campaigns;
+
+  const handleNavigate = (path: string, tab: PageTab) => {
+    if (propSetActiveTab) {
+      propSetActiveTab(tab);
+    } else {
+      router.push(path);
+    }
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleDonate = (campaignId?: string) => {
+    if (propOpenDonateModal) {
+      propOpenDonateModal(campaignId);
+    } else {
+      modalContext.openDonateModal(campaignId);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f7f9ff] text-[#181c20]">
       {/* Hero Section */}
@@ -26,14 +58,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ campaigns, setActiveTab,
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <button
-              onClick={() => setActiveTab('campaigns')}
+              onClick={() => handleNavigate('/campaigns', 'campaigns')}
               className="bg-[#012d1d] hover:bg-[#1b4332] text-white font-semibold text-sm px-6 py-3.5 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer active:scale-95"
             >
               <span>Get Involved</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <button
-              onClick={() => setActiveTab('about')}
+              onClick={() => handleNavigate('/about', 'about')}
               className="border border-[#012d1d] text-[#012d1d] hover:bg-[#ebeef3] font-semibold text-sm px-6 py-3.5 rounded-lg transition-all cursor-pointer"
             >
               Learn More
@@ -120,7 +152,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ campaigns, setActiveTab,
             </p>
           </div>
           <button
-            onClick={() => setActiveTab('campaigns')}
+            onClick={() => handleNavigate('/campaigns', 'campaigns')}
             className="text-sm font-bold text-[#012d1d] hover:text-[#116c4a] flex items-center gap-1 cursor-pointer"
           >
             <span>View All Campaigns</span>
@@ -166,7 +198,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ campaigns, setActiveTab,
                       ₹{campaign.raisedAmount.toLocaleString('en-IN')} raised
                     </span>
                     <button
-                      onClick={() => openDonateModal(campaign.id)}
+                      onClick={() => handleDonate(campaign.id)}
                       className="bg-[#012d1d] text-white hover:bg-[#1b4332] text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
                     >
                       <Heart className="w-3.5 h-3.5 fill-[#a1f4c8] text-[#a1f4c8]" />

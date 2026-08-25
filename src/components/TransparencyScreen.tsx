@@ -1,19 +1,34 @@
+'use client';
+
 import React, { useState } from 'react';
 import { FinancialReport, Donation } from '../types';
-import { FileText, Download, ShieldCheck, CheckCircle2, Eye, TrendingUp, IndianRupee, Award } from 'lucide-react';
+import { FileText, Download, ShieldCheck, CheckCircle2, Eye, IndianRupee, Award } from 'lucide-react';
+import { useModal } from '../context/ModalContext';
 
 interface TransparencyScreenProps {
-  reports: FinancialReport[];
-  donations: Donation[];
-  openReportViewer: (report: FinancialReport) => void;
+  reports?: FinancialReport[];
+  donations?: Donation[];
+  openReportViewer?: (report: FinancialReport) => void;
 }
 
 export const TransparencyScreen: React.FC<TransparencyScreenProps> = ({
-  reports,
-  donations,
-  openReportViewer
+  reports: propReports,
+  donations: propDonations,
+  openReportViewer: propOpenReportViewer,
 }) => {
   const [downloadSuccessMessage, setDownloadSuccessMessage] = useState<string | null>(null);
+  const modalContext = useModal();
+
+  const reports = propReports || modalContext.reports;
+  const donations = propDonations || modalContext.donations;
+
+  const handleInspect = (report: FinancialReport) => {
+    if (propOpenReportViewer) {
+      propOpenReportViewer(report);
+    } else {
+      modalContext.openReportViewer(report);
+    }
+  };
 
   const handleDownload = (report: FinancialReport) => {
     // Generate an authentic PDF document download blob for the report
@@ -202,7 +217,7 @@ Certified by Independent Chartered Accountants Board & Netaji Audit Committee.
 
                 <div className="space-y-2 pt-4 border-t border-[#f1f4f9]">
                   <button
-                    onClick={() => openReportViewer(report)}
+                    onClick={() => handleInspect(report)}
                     className="w-full bg-[#f1f4f9] hover:bg-[#e0e3e8] text-[#012d1d] font-semibold text-xs py-2.5 px-3 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Eye className="w-3.5 h-3.5" />
