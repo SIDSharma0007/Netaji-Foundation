@@ -179,13 +179,9 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-[#012d1d] text-white rounded-2xl p-8 shadow-md relative overflow-hidden space-y-6">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlpnznsOkBkXy5NwFe4H-UrGKTkYF6xu9jW5ohYr8LFosaFSq7IHMXOR8FOY4ESFFm-80RJPTkktq3mvvjpIRNNMw_r_KBK1PpG1VO-79QQak2E5URfQ8b0XWaNt2qVaTCE1o7-Oa4KNCV1trTw0EeozjPtsq222Da3oRl_uZmdbIZrxik2gb_x_I-9npFl9sHFOMRGrdDjV9JZmFlv6jpI4_j0jHwXm4WWTDVvDKSzdAnh93uxWw"
-                alt="Netaji Foundation Headquarters New Delhi"
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQpDe8z_ql-JNaG0ty2rKS2g8B7iO4p5zgD-VrHoz_sl3bsDdeHnLwwy3MImh_3VFBQgnsVHkFaOf6knrB5Jp3ZT-HkVE9R2p2KzxlVBa0smqvbKD6DRzKTNAfjqO6YLdMFJY46JJUazIfhbFLKXkEp_TAAFTij_C4dJvCtulcM5iGxIqtFguMRA2YeGne2CkZnK4Yq9snLsFxQULi8cLg5Bq6djr20cWUfnOTQ7Dz8SwRYrgZg0g';
-                }}
-                className="absolute inset-0 w-full h-full object-cover opacity-15"
+                src="/images/netaji-samiti-banner.jpg"
+                alt="Netaji Subhash Seva Samiti Official Headquarters Banner"
+                className="absolute inset-0 w-full h-full object-cover opacity-20"
               />
 
               <div className="relative z-10 space-y-6">
