@@ -2,17 +2,15 @@
 
 import React, { useState } from 'react';
 import { Campaign } from '../types';
-import { Heart, Search, MapPin, Filter } from 'lucide-react';
+import { Search, MapPin, Filter, Users } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 interface CampaignsScreenProps {
   campaigns?: Campaign[];
-  openDonateModal?: (campaignId?: string) => void;
 }
 
 export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
   campaigns: propCampaigns,
-  openDonateModal: propOpenDonateModal,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -20,12 +18,8 @@ export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
 
   const campaigns = propCampaigns || modalContext.campaigns;
 
-  const handleDonate = (campaignId?: string) => {
-    if (propOpenDonateModal) {
-      propOpenDonateModal(campaignId);
-    } else {
-      modalContext.openDonateModal(campaignId);
-    }
+  const handleVolunteer = () => {
+    modalContext.openVolunteerModal();
   };
 
   const categories = ['All', 'Education', 'Health', 'Environment', 'Livelihood'];
@@ -163,11 +157,11 @@ export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
                     </div>
 
                     <button
-                      onClick={() => handleDonate(campaign.id)}
+                      onClick={handleVolunteer}
                       className="w-full mt-3 bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-98"
                     >
-                      <Heart className="w-4 h-4 fill-[#a1f4c8] text-[#a1f4c8]" />
-                      <span>Donate to Campaign</span>
+                      <Users className="w-4 h-4 text-[#a1f4c8]" />
+                      <span>Volunteer for Campaign</span>
                     </button>
                   </div>
                 </div>

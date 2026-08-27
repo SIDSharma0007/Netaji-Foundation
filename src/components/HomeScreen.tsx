@@ -3,19 +3,17 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Campaign, PageTab } from '../types';
-import { Users, TrendingUp, CheckCircle, ArrowRight, Heart } from 'lucide-react';
+import { Users, TrendingUp, CheckCircle, ArrowRight } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 interface HomeScreenProps {
   campaigns?: Campaign[];
   setActiveTab?: (tab: PageTab) => void;
-  openDonateModal?: (campaignId?: string) => void;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
   campaigns: propCampaigns,
   setActiveTab: propSetActiveTab,
-  openDonateModal: propOpenDonateModal,
 }) => {
   const router = useRouter();
   const modalContext = useModal();
@@ -30,14 +28,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     }
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleDonate = (campaignId?: string) => {
-    if (propOpenDonateModal) {
-      propOpenDonateModal(campaignId);
-    } else {
-      modalContext.openDonateModal(campaignId);
     }
   };
 
@@ -198,11 +188,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                       ₹{campaign.raisedAmount.toLocaleString('en-IN')} raised
                     </span>
                     <button
-                      onClick={() => handleDonate(campaign.id)}
+                      onClick={() => handleNavigate('/campaigns', 'campaigns')}
                       className="bg-[#012d1d] text-white hover:bg-[#1b4332] text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
                     >
-                      <Heart className="w-3.5 h-3.5 fill-[#a1f4c8] text-[#a1f4c8]" />
-                      <span>Donate</span>
+                      <span>View Campaign</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#a1f4c8]" />
                     </button>
                   </div>
                 </div>

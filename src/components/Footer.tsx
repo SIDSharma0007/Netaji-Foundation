@@ -3,25 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { PageTab } from '../types';
-import { ShieldCheck, Heart, Sprout } from 'lucide-react';
-import { useModal } from '../context/ModalContext';
+import { ShieldCheck, Users, Sprout } from 'lucide-react';
 
 interface FooterProps {
   setActiveTab?: (tab: PageTab) => void;
-  openDonateModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ setActiveTab: propSetActiveTab, openDonateModal: propOpenDonateModal }) => {
-  const modalContext = useModal();
-
-  const handleDonate = () => {
-    if (propOpenDonateModal) {
-      propOpenDonateModal();
-    } else {
-      modalContext.openDonateModal();
-    }
-  };
-
+export const Footer: React.FC<FooterProps> = ({ setActiveTab: propSetActiveTab }) => {
   const handleScroll = (tab?: PageTab) => {
     if (propSetActiveTab && tab) {
       propSetActiveTab(tab);
@@ -97,18 +85,19 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab: propSetActiveTab, 
         <div className="col-span-1 space-y-4">
           <h3 className="font-semibold text-sm text-[#012d1d] uppercase tracking-wider">Support Our Mission</h3>
           <p className="text-xs text-[#414844]">
-            Every single donation is backed by strict financial transparency and audited impact statements.
+            Our grassroots initiatives are backed by strict financial transparency and audited impact statements.
           </p>
-          <button
-            onClick={handleDonate}
+          <Link
+            href="/contact"
+            onClick={() => handleScroll('contact')}
             className="w-full bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
           >
-            <Heart className="w-4 h-4 text-[#a1f4c8] fill-[#a1f4c8]" />
-            <span>Support Us Today</span>
-          </button>
+            <Users className="w-4 h-4 text-[#a1f4c8]" />
+            <span>Join as Volunteer</span>
+          </Link>
           <div className="flex items-center gap-1.5 text-xs text-[#717973]">
             <ShieldCheck className="w-4 h-4 text-[#116c4a]" />
-            <span>256-bit SSL Encrypted & Audited NGO</span>
+            <span>Audited & Certified NGO</span>
           </div>
         </div>
       </div>

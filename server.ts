@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { INITIAL_CAMPAIGNS, INITIAL_REPORTS } from './src/data/initialData.js';
-import { Campaign, Donation, FinancialReport, ContactMessage, VolunteerApplication } from './src/types.js';
+import { Campaign, FinancialReport, ContactMessage, VolunteerApplication } from './src/types.js';
 
 async function startServer() {
   const app = express();
@@ -13,31 +13,6 @@ async function startServer() {
   // In-memory persistent database stores
   let campaigns: Campaign[] = [...INITIAL_CAMPAIGNS];
   let reports: FinancialReport[] = [...INITIAL_REPORTS];
-  let donations: Donation[] = [
-    {
-      id: 'd-101',
-      campaignId: 'c1',
-      campaignTitle: 'Rural Literacy Initiative',
-      amount: 2500,
-      fullName: 'Priya Sharma',
-      email: 'priya.sharma@example.in',
-      createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
-      receiptNumber: 'NF-2026-88421',
-      paymentMethod: 'UPI / Razorpay (SSL Encrypted)'
-    },
-    {
-      id: 'd-102',
-      campaignId: 'c2',
-      campaignTitle: 'Clean Water & Handpump Access',
-      amount: 5000,
-      fullName: 'Rajesh Kumar',
-      email: 'rajesh.k@example.org.in',
-      createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-      receiptNumber: 'NF-2026-88422',
-      paymentMethod: 'NetBanking / Razorpay'
-    }
-  ];
-
   let contactMessages: ContactMessage[] = [];
   let volunteerApplications: VolunteerApplication[] = [];
 
@@ -59,51 +34,6 @@ async function startServer() {
       return res.status(404).json({ error: 'Campaign not found' });
     }
     res.json({ campaign });
-  });
-
-  // POST /api/donations (Process donation)
-  app.post('/api/donations', (req, res) => {
-    const { campaignId, amount, fullName, email, paymentMethod } = req.body;
-
-    if (!amount || amount <= 0 || !fullName || !email) {
-      return res.status(400).json({ error: 'Please provide valid donation details.' });
-    }
-
-    const numericAmount = Number(amount);
-    let targetCampaign = campaigns.find(c => c.id === campaignId);
-
-    if (targetCampaign) {
-      targetCampaign.raisedAmount += numericAmount;
-      targetCampaign.donorsCount += 1;
-      targetCampaign.percentage = Math.min(100, Math.round((targetCampaign.raisedAmount / targetCampaign.goalAmount) * 100));
-    }
-
-    const receiptNumber = `NF-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
-
-    const newDonation: Donation = {
-      id: `d-${Date.now()}`,
-      campaignId: targetCampaign ? targetCampaign.id : undefined,
-      campaignTitle: targetCampaign ? targetCampaign.title : 'General Foundation Fund',
-      amount: numericAmount,
-      fullName,
-      email,
-      createdAt: new Date().toISOString(),
-      receiptNumber,
-      paymentMethod: paymentMethod || 'Credit Card (SSL Encrypted)'
-    };
-
-    donations.unshift(newDonation);
-
-    res.status(201).json({
-      message: 'Donation processed successfully. Thank you for supporting Netaji Foundation!',
-      donation: newDonation,
-      updatedCampaign: targetCampaign
-    });
-  });
-
-  // GET /api/donations (Audit log list)
-  app.get('/api/donations', (_req, res) => {
-    res.json({ donations, totalDonations: donations.reduce((sum, d) => sum + d.amount, 0) });
   });
 
   // GET /api/transparency (Financial metrics & reports)
