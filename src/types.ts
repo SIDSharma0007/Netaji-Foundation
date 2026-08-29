@@ -1,4 +1,4 @@
-export type PageTab = 'home' | 'about' | 'campaigns' | 'transparency' | 'donate' | 'contact';
+export type PageTab = 'home' | 'about' | 'campaigns' | 'transparency' | 'contact';
 
 export interface Campaign {
   id: string;
@@ -14,17 +14,6 @@ export interface Campaign {
   location: string;
 }
 
-export interface Donation {
-  id: string;
-  campaignId?: string;
-  campaignTitle?: string;
-  amount: number;
-  fullName: string;
-  email: string;
-  createdAt: string;
-  receiptNumber: string;
-  paymentMethod: string;
-}
 
 export interface FinancialReport {
   id: string;

@@ -1,26 +1,23 @@
 'use client';
 
 import React, { useState } from 'react';
-import { FinancialReport, Donation } from '../types';
+import { FinancialReport } from '../types';
 import { FileText, Download, ShieldCheck, CheckCircle2, Eye, IndianRupee, Award } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 interface TransparencyScreenProps {
   reports?: FinancialReport[];
-  donations?: Donation[];
   openReportViewer?: (report: FinancialReport) => void;
 }
 
 export const TransparencyScreen: React.FC<TransparencyScreenProps> = ({
   reports: propReports,
-  donations: propDonations,
   openReportViewer: propOpenReportViewer,
 }) => {
   const [downloadSuccessMessage, setDownloadSuccessMessage] = useState<string | null>(null);
   const modalContext = useModal();
 
   const reports = propReports || modalContext.reports;
-  const donations = propDonations || modalContext.donations;
 
   const handleInspect = (report: FinancialReport) => {
     if (propOpenReportViewer) {
@@ -241,33 +238,66 @@ Certified by Independent Chartered Accountants Board & Netaji Audit Committee.
         <section className="bg-white border border-[#e0e3e8] rounded-2xl p-8 shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-2">
             <div>
-              <h2 className="text-xl font-bold text-[#012d1d]">Live Transaction Audit Feed</h2>
+              <h2 className="text-xl font-bold text-[#012d1d]">Live Field Disbursement & Audit Feed</h2>
               <p className="text-xs text-[#414844] mt-1">
-                Real-time cryptographic verification receipts generated upon donation
+                Real-time ledger of verified capital disbursements to grassroots community projects
               </p>
             </div>
             <div className="flex items-center gap-1 text-xs text-[#116c4a] font-bold">
               <span className="w-2 h-2 rounded-full bg-[#116c4a] animate-ping"></span>
-              <span>PostgreSQL Audit Ledger Active</span>
+              <span>Audited Disbursement Ledger Active</span>
             </div>
           </div>
 
           <div className="divide-y divide-[#f1f4f9] overflow-x-auto">
-            {donations.map((d) => (
-              <div key={d.id} className="py-3 flex items-center justify-between text-xs gap-4 min-w-[500px]">
+            {[
+              {
+                id: 'tx-1',
+                amount: 1250000,
+                project: 'Clean Water & Solar Handpump Procurement',
+                region: 'Bundelkhand & Rajasthan Arid Belt',
+                refNo: 'DISB-2026-0841',
+                date: '2026-08-20',
+              },
+              {
+                id: 'tx-2',
+                amount: 820000,
+                project: 'Mobile Literacy Units & Classroom Supplies',
+                region: 'UP & Bihar Rural Belt',
+                refNo: 'DISB-2026-0839',
+                date: '2026-08-16',
+              },
+              {
+                id: 'tx-3',
+                amount: 600000,
+                project: 'Urban Miyawaki Afforestation & Saplings',
+                region: 'NCR & Bengaluru Metro Zones',
+                refNo: 'DISB-2026-0824',
+                date: '2026-08-10',
+              },
+              {
+                id: 'tx-4',
+                amount: 940000,
+                project: 'Youth Vocational Digital Lab Setup',
+                region: 'Odisha & Jharkhand Skill Hubs',
+                refNo: 'DISB-2026-0812',
+                date: '2026-08-03',
+              },
+            ].map((tx) => (
+              <div key={tx.id} className="py-3.5 flex items-center justify-between text-xs gap-4 min-w-[500px]">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-8 rounded-full bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-xs px-2">
-                    ₹{d.amount.toLocaleString('en-IN')}
+                  <div className="w-20 h-8 rounded-full bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-xs px-2">
+                    ₹{tx.amount.toLocaleString('en-IN')}
                   </div>
                   <div>
-                    <p className="font-bold text-[#012d1d]">{d.fullName}</p>
-                    <p className="text-[#717973]">{d.campaignTitle}</p>
+                    <p className="font-bold text-[#012d1d]">{tx.project}</p>
+                    <p className="text-[#717973]">{tx.region}</p>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <p className="font-mono text-[#012d1d] font-semibold">{d.receiptNumber}</p>
-                  <p className="text-[#717973]">{new Date(d.createdAt).toLocaleDateString()}</p>
+                  <p className="font-mono text-[#012d1d] font-semibold">{tx.refNo}</p>
+                  <p className="text-[#717973]">{new Date(tx.date).toLocaleDateString()}</p>
                 </div>
               </div>
             ))}
