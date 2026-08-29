@@ -2,17 +2,15 @@
 
 import React, { useState } from 'react';
 import { Campaign } from '../types';
-import { Heart, Search, MapPin, Filter } from 'lucide-react';
+import { Search, MapPin, Filter, Users } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 interface CampaignsScreenProps {
   campaigns?: Campaign[];
-  openDonateModal?: (campaignId?: string) => void;
 }
 
 export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
   campaigns: propCampaigns,
-  openDonateModal: propOpenDonateModal,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -20,12 +18,8 @@ export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
 
   const campaigns = propCampaigns || modalContext.campaigns;
 
-  const handleDonate = (campaignId?: string) => {
-    if (propOpenDonateModal) {
-      propOpenDonateModal(campaignId);
-    } else {
-      modalContext.openDonateModal(campaignId);
-    }
+  const handleVolunteer = () => {
+    modalContext.openVolunteerModal();
   };
 
   const categories = ['All', 'Education', 'Health', 'Environment', 'Livelihood'];
@@ -116,7 +110,7 @@ export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
                     alt={campaign.imageAlt || campaign.title}
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQpDe8z_ql-JNaG0ty2rKS2g8B7iO4p5zgD-VrHoz_sl3bsDdeHnLwwy3MImh_3VFBQgnsVHkFaOf6knrB5Jp3ZT-HkVE9R2p2KzxlVBa0smqvbKD6DRzKTNAfjqO6YLdMFJY46JJUazIfhbFLKXkEp_TAAFTij_C4dJvCtulcM5iGxIqtFguMRA2YeGne2CkZnK4Yq9snLsFxQULi8cLg5Bq6djr20cWUfnOTQ7Dz8SwRYrgZg0g';
+                      (e.target as HTMLImageElement).src = '/images/hero-elderly-relief.jpg';
                     }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -163,11 +157,11 @@ export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
                     </div>
 
                     <button
-                      onClick={() => handleDonate(campaign.id)}
+                      onClick={handleVolunteer}
                       className="w-full mt-3 bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-98"
                     >
-                      <Heart className="w-4 h-4 fill-[#a1f4c8] text-[#a1f4c8]" />
-                      <span>Donate to Campaign</span>
+                      <Users className="w-4 h-4 text-[#a1f4c8]" />
+                      <span>Volunteer for Campaign</span>
                     </button>
                   </div>
                 </div>

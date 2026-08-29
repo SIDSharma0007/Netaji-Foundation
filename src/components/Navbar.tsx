@@ -4,31 +4,19 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PageTab } from '../types';
-import { Heart, Menu, X, Sprout } from 'lucide-react';
-import { useModal } from '../context/ModalContext';
+import { Menu, X, Sprout, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
   activeTab?: PageTab;
   setActiveTab?: (tab: PageTab) => void;
-  openDonateModal?: (campaignId?: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab: propActiveTab,
   setActiveTab: propSetActiveTab,
-  openDonateModal: propOpenDonateModal,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const modalContext = useModal();
-
-  const handleDonate = () => {
-    if (propOpenDonateModal) {
-      propOpenDonateModal();
-    } else {
-      modalContext.openDonateModal();
-    }
-  };
 
   const navLinks: { label: string; tab: PageTab; href: string }[] = [
     { label: 'Home', tab: 'home', href: '/' },
@@ -94,25 +82,20 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </div>
 
-        {/* Desktop Donate CTA */}
+        {/* Desktop Get Involved CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={handleDonate}
-            className="bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm px-6 py-2.5 rounded-lg transition-colors min-h-[44px] flex items-center gap-2 shadow-xs cursor-pointer active:scale-95"
+          <Link
+            href="/contact"
+            onClick={() => handleNavClick('contact')}
+            className="bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors min-h-[44px] flex items-center gap-2 shadow-xs cursor-pointer active:scale-95"
           >
-            <span>Donate</span>
-            <Heart className="w-4 h-4 text-[#a1f4c8] fill-[#a1f4c8]" />
-          </button>
+            <span>Get Involved</span>
+            <ArrowRight className="w-4 h-4 text-[#a1f4c8]" />
+          </Link>
         </div>
 
         {/* Mobile Hamburger Toggle */}
         <div className="flex items-center gap-2 md:hidden">
-          <button
-            onClick={handleDonate}
-            className="bg-[#012d1d] text-white text-xs px-3 py-2 rounded-lg font-semibold flex items-center gap-1"
-          >
-            <span>Donate</span>
-          </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-[#012d1d] hover:bg-[#ebeef3] rounded-lg transition-colors cursor-pointer"

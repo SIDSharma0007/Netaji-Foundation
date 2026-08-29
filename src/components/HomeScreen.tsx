@@ -3,19 +3,17 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Campaign, PageTab } from '../types';
-import { Users, TrendingUp, CheckCircle, ArrowRight, Heart } from 'lucide-react';
+import { Users, TrendingUp, CheckCircle, ArrowRight } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 interface HomeScreenProps {
   campaigns?: Campaign[];
   setActiveTab?: (tab: PageTab) => void;
-  openDonateModal?: (campaignId?: string) => void;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
   campaigns: propCampaigns,
   setActiveTab: propSetActiveTab,
-  openDonateModal: propOpenDonateModal,
 }) => {
   const router = useRouter();
   const modalContext = useModal();
@@ -30,14 +28,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     }
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleDonate = (campaignId?: string) => {
-    if (propOpenDonateModal) {
-      propOpenDonateModal(campaignId);
-    } else {
-      modalContext.openDonateModal(campaignId);
     }
   };
 
@@ -76,23 +66,18 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         <div className="flex-1 w-full">
           <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-md border border-[#e0e3e8] group">
             <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyWZXP0eSrBsfjhKPV9hjvvvdM39Gvu8sas5K5XXtBgxf3sdodib-2onfRc1nHq7gmqHbjZ58zGJ_tX0YTY3M10Z1oGX0N8f3RnAYacBgcSFbbXwmyjLw34ZWrRpXhQ8XjKkp4IhVq_xBvDBW3nrW7rbl3UG9FTS6KOsnrKXTXVtwUose14CqfYOx7F0PC1dMJuRJCl1ZD_Bi6tMx2rWmJjAuokRduEdGUTbdZBWo_v9yw8qSaZFQ"
-              alt="Indian community volunteers and children in rural village"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                // Fallback if image fails to load
-                (e.target as HTMLImageElement).src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQpDe8z_ql-JNaG0ty2rKS2g8B7iO4p5zgD-VrHoz_sl3bsDdeHnLwwy3MImh_3VFBQgnsVHkFaOf6knrB5Jp3ZT-HkVE9R2p2KzxlVBa0smqvbKD6DRzKTNAfjqO6YLdMFJY46JJUazIfhbFLKXkEp_TAAFTij_C4dJvCtulcM5iGxIqtFguMRA2YeGne2CkZnK4Yq9snLsFxQULi8cLg5Bq6djr20cWUfnOTQ7Dz8SwRYrgZg0g';
-              }}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              src="/images/hero-elderly-relief.jpg"
+              alt="Netaji Foundation leadership and volunteers distributing essential food and healthcare packets to elderly beneficiaries"
+              className="w-full h-full object-cover object-[center_35%] group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
             <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-white/20 shadow-sm flex items-center justify-between">
               <div>
-                <p className="text-xs font-bold text-[#012d1d]">Grassroots Impact</p>
-                <p className="text-xs text-[#414844]">Rural Indian Community Initiative</p>
+                <p className="text-xs font-bold text-[#012d1d]">Direct Community Relief</p>
+                <p className="text-xs text-[#414844]">Elderly & Healthcare Distribution Drive</p>
               </div>
               <span className="text-xs px-2.5 py-1 bg-[#a1f4c8] text-[#005236] font-bold rounded-full">
-                Active
+                Active Impact
               </span>
             </div>
           </div>
@@ -198,11 +183,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                       ₹{campaign.raisedAmount.toLocaleString('en-IN')} raised
                     </span>
                     <button
-                      onClick={() => handleDonate(campaign.id)}
+                      onClick={() => handleNavigate('/campaigns', 'campaigns')}
                       className="bg-[#012d1d] text-white hover:bg-[#1b4332] text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
                     >
-                      <Heart className="w-3.5 h-3.5 fill-[#a1f4c8] text-[#a1f4c8]" />
-                      <span>Donate</span>
+                      <span>View Campaign</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#a1f4c8]" />
                     </button>
                   </div>
                 </div>

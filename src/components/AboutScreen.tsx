@@ -39,13 +39,9 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ setActiveTab: propSetA
           <div className="lg:col-span-5">
             <div className="rounded-2xl overflow-hidden border border-[#e0e3e8] shadow-md aspect-[4/3]">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQpDe8z_ql-JNaG0ty2rKS2g8B7iO4p5zgD-VrHoz_sl3bsDdeHnLwwy3MImh_3VFBQgnsVHkFaOf6knrB5Jp3ZT-HkVE9R2p2KzxlVBa0smqvbKD6DRzKTNAfjqO6YLdMFJY46JJUazIfhbFLKXkEp_TAAFTij_C4dJvCtulcM5iGxIqtFguMRA2YeGne2CkZnK4Yq9snLsFxQULi8cLg5Bq6djr20cWUfnOTQ7Dz8SwRYrgZg0g"
-                alt="Community volunteers working together"
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAyWZXP0eSrBsfjhKPV9hjvvvdM39Gvu8sas5K5XXtBgxf3sdodib-2onfRc1nHq7gmqHbjZ58zGJ_tX0YTY3M10Z1oGX0N8f3RnAYacBgcSFbbXwmyjLw34ZWrRpXhQ8XjKkp4IhVq_xBvDBW3nrW7rbl3UG9FTS6KOsnrKXTXVtwUose14CqfYOx7F0PC1dMJuRJCl1ZD_Bi6tMx2rWmJjAuokRduEdGUTbdZBWo_v9yw8qSaZFQ';
-                }}
-                className="w-full h-full object-cover"
+                src="/images/about-netaji-tribute.jpg"
+                alt="Chief Patron Gautam De and Netaji Subhash Seva Samiti members paying ceremonial tribute to Netaji Subhash Chandra Bose"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>
@@ -120,29 +116,51 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ setActiveTab: propSetA
         </div>
       </section>
 
-      {/* Callout Banner */}
-      <section className="max-w-[1200px] mx-auto px-4 md:px-10 py-12">
-        <div className="relative rounded-2xl overflow-hidden min-h-[300px] flex items-center justify-center p-8 text-center text-white border border-[#e0e3e8] shadow-md">
-          <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyWZXP0eSrBsfjhKPV9hjvvvdM39Gvu8sas5K5XXtBgxf3sdodib-2onfRc1nHq7gmqHbjZ58zGJ_tX0YTY3M10Z1oGX0N8f3RnAYacBgcSFbbXwmyjLw34ZWrRpXhQ8XjKkp4IhVq_xBvDBW3nrW7rbl3UG9FTS6KOsnrKXTXVtwUose14CqfYOx7F0PC1dMJuRJCl1ZD_Bi6tMx2rWmJjAuokRduEdGUTbdZBWo_v9yw8qSaZFQ"
-            alt="Indian rural community landscape"
-            referrerPolicy="no-referrer"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQpDe8z_ql-JNaG0ty2rKS2g8B7iO4p5zgD-VrHoz_sl3bsDdeHnLwwy3MImh_3VFBQgnsVHkFaOf6knrB5Jp3ZT-HkVE9R2p2KzxlVBa0smqvbKD6DRzKTNAfjqO6YLdMFJY46JJUazIfhbFLKXkEp_TAAFTij_C4dJvCtulcM5iGxIqtFguMRA2YeGne2CkZnK4Yq9snLsFxQULi8cLg5Bq6djr20cWUfnOTQ7Dz8SwRYrgZg0g';
-            }}
-            className="absolute inset-0 w-full h-full object-cover brightness-50"
-          />
-          <div className="relative z-10 space-y-6 max-w-xl">
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-              Building Foundations for the Future
-            </h2>
-            <div>
+      {/* Callout Showcase Section */}
+      <section className="max-w-[1200px] mx-auto px-4 md:px-10 py-12 md:py-16">
+        <div className="bg-white border border-[#e0e3e8] rounded-3xl overflow-hidden shadow-xl">
+          {/* Main Visual - 100% Unobscured High-Fidelity Photograph */}
+          <div className="relative aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden bg-[#012d1d] group">
+            <img
+              src="/images/about-community-homage.jpg"
+              alt="Netaji Foundation community members and volunteers in collective homage"
+              className="w-full h-full object-cover object-[center_35%] group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+            <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold">
+              <span className="w-2 h-2 rounded-full bg-[#a1f4c8] animate-pulse"></span>
+              <span>Community Homage & Grassroots Unity — Jamshedpur</span>
+            </div>
+          </div>
+
+          {/* Editorial CTA Panel Below Image */}
+          <div className="p-8 md:p-12 bg-gradient-to-br from-[#012d1d] via-[#053a25] to-[#012d1d] text-white flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="space-y-3 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#a1f4c8]/20 border border-[#a1f4c8]/40 text-[#a1f4c8] text-xs font-bold tracking-wide">
+                <span>Lasting Legacy & Future Action</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                Building Foundations for the Future
+              </h2>
+              <p className="text-sm md:text-base text-white/80 leading-relaxed">
+                Driven by collective community responsibility, mutual trust, and the enduring spirit of selfless service across generations.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
               <button
                 onClick={() => handleNavigate('/campaigns', 'campaigns')}
-                className="bg-white text-[#012d1d] hover:bg-[#cee9d3] font-bold text-sm px-6 py-3.5 rounded-lg transition-colors cursor-pointer shadow-md inline-flex items-center gap-2"
+                className="bg-white text-[#012d1d] hover:bg-[#cee9d3] font-bold text-sm px-7 py-3.5 rounded-xl transition-all cursor-pointer shadow-lg inline-flex items-center gap-2 active:scale-95"
               >
                 <span>See Our Projects</span>
                 <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => handleNavigate('/contact', 'contact')}
+                className="border border-white/30 text-white hover:bg-white/10 font-semibold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer inline-flex items-center gap-2"
+              >
+                <span>Join as Volunteer</span>
               </button>
             </div>
           </div>
