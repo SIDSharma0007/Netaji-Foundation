@@ -53,8 +53,8 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab: propSetActiveTab }
               </Link>
             </li>
             <li>
-              <Link href="/transparency" onClick={() => handleScroll('transparency')} className="hover:text-[#012d1d] cursor-pointer">
-                Financial Transparency
+              <Link href="/contact" onClick={() => handleScroll('contact')} className="hover:text-[#012d1d] cursor-pointer">
+                Contact Us
               </Link>
             </li>
           </ul>
@@ -63,11 +63,6 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab: propSetActiveTab }
         <div className="col-span-1 space-y-2">
           <h3 className="font-semibold text-sm text-[#012d1d] uppercase tracking-wider">Resources & Trust</h3>
           <ul className="space-y-2 text-sm text-[#414844]">
-            <li>
-              <Link href="/transparency" onClick={() => handleScroll('transparency')} className="hover:text-[#012d1d] cursor-pointer">
-                Annual Financial Reports
-              </Link>
-            </li>
             <li>
               <Link href="/contact" onClick={() => handleScroll('contact')} className="hover:text-[#012d1d] cursor-pointer">
                 Volunteer Portal
@@ -85,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab: propSetActiveTab }
         <div className="col-span-1 space-y-4">
           <h3 className="font-semibold text-sm text-[#012d1d] uppercase tracking-wider">Support Our Mission</h3>
           <p className="text-xs text-[#414844]">
-            Our grassroots initiatives are backed by strict financial transparency and audited impact statements.
+            Our grassroots initiatives are backed by dedicated volunteers and verified community impact statements.
           </p>
           <Link
             href="/contact"

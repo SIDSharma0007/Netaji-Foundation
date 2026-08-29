@@ -22,7 +22,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Home', tab: 'home', href: '/' },
     { label: 'About', tab: 'about', href: '/about' },
     { label: 'Campaigns', tab: 'campaigns', href: '/campaigns' },
-    { label: 'Transparency', tab: 'transparency', href: '/transparency' },
     { label: 'Contact', tab: 'contact', href: '/contact' },
   ];
 

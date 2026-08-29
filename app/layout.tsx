@@ -7,21 +7,19 @@ import { ModalProvider } from '@/src/context/ModalContext';
 
 export const metadata: Metadata = {
   title: 'Netaji Foundation - Empowering Communities, Building Futures',
-  description: 'Empowering local communities through sustainable development, education, health initiatives, and absolute financial transparency.',
+  description: 'Empowering local communities through sustainable development, education, and health initiatives.',
   keywords: [
     'Netaji Foundation',
     'NGO',
     'Non-Profit',
     'Community Development',
-    'Section 80G Tax Exemption',
     'Rural Literacy',
-    'Clean Water India',
-    'Financial Transparency'
+    'Clean Water India'
   ],
   authors: [{ name: 'Netaji Foundation' }],
   openGraph: {
     title: 'Netaji Foundation - Empowering Communities, Building Futures',
-    description: 'Empowering local communities through sustainable development, education, health initiatives, and absolute financial transparency.',
+    description: 'Empowering local communities through sustainable development, education, and health initiatives.',
     type: 'website',
     locale: 'en_US',
     siteName: 'Netaji Foundation'

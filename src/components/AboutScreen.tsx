@@ -70,7 +70,7 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ setActiveTab: propSetA
                 Our Mission
               </h2>
               <p className="text-base text-[#414844] leading-relaxed">
-                To cultivate environments where individuals can thrive through equitable access to resources. We are committed to transparency, operational integrity, and ensuring that every contribution translates into tangible, measurable human impact.
+                To cultivate environments where individuals can thrive through equitable access to resources. We are committed to operational integrity, community empowerment, and ensuring that every contribution translates into tangible, measurable human impact.
               </p>
             </div>
           </div>
@@ -84,7 +84,7 @@ export const AboutScreen: React.FC<AboutScreenProps> = ({ setActiveTab: propSetA
               <div>
                 <h3 className="text-lg font-bold text-[#012d1d] mb-1">Unwavering Integrity</h3>
                 <p className="text-sm text-[#414844] leading-relaxed">
-                  We operate with complete transparency. Our financial and operational reports are public, ensuring accountability to every stakeholder.
+                  We operate with complete accountability. Our operational programs and community initiatives ensure trust with every stakeholder.
                 </p>
               </div>
             </div>

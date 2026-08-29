@@ -1,4 +1,4 @@
-import { Campaign, FinancialReport } from '../types';
+import { Campaign } from '../types';
 
 export const INITIAL_CAMPAIGNS: Campaign[] = [
   {
@@ -52,36 +52,6 @@ export const INITIAL_CAMPAIGNS: Campaign[] = [
     percentage: 65,
     donorsCount: 410,
     location: 'Jamshedpur & Jharkhand Belt'
-  }
-];
-
-export const INITIAL_REPORTS: FinancialReport[] = [
-  {
-    id: 'r2023',
-    year: 2023,
-    title: '2023 Annual Financial Report',
-    description: 'Comprehensive financial review, audited balance sheets, Section 80G tax filings, and field impact assessment in INR.',
-    downloadCount: 1420,
-    fileSize: '4.8 MB',
-    url: '/reports/Netaji_Foundation_Annual_Report_2023.pdf'
-  },
-  {
-    id: 'r2022',
-    year: 2022,
-    title: '2022 Annual Financial Report',
-    description: 'Archived financial data, village impact metrics, and expansion reports certified by independent CAs.',
-    downloadCount: 980,
-    fileSize: '3.6 MB',
-    url: '/reports/Netaji_Foundation_Annual_Report_2022.pdf'
-  },
-  {
-    id: 'r2021',
-    year: 2021,
-    title: '2021 Annual Financial Report',
-    description: 'Archived financial statement, disaster relief accounting, and foundational growth milestones.',
-    downloadCount: 750,
-    fileSize: '3.2 MB',
-    url: '/reports/Netaji_Foundation_Annual_Report_2021.pdf'
   }
 ];
 
