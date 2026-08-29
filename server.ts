@@ -1,8 +1,8 @@
 import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
-import { INITIAL_CAMPAIGNS, INITIAL_REPORTS } from './src/data/initialData.js';
-import { Campaign, FinancialReport, ContactMessage, VolunteerApplication } from './src/types.js';
+import { INITIAL_CAMPAIGNS } from './src/data/initialData.js';
+import { Campaign, ContactMessage, VolunteerApplication } from './src/types.js';
 
 async function startServer() {
   const app = express();
@@ -12,7 +12,6 @@ async function startServer() {
 
   // In-memory persistent database stores
   let campaigns: Campaign[] = [...INITIAL_CAMPAIGNS];
-  let reports: FinancialReport[] = [...INITIAL_REPORTS];
   let contactMessages: ContactMessage[] = [];
   let volunteerApplications: VolunteerApplication[] = [];
 
@@ -34,24 +33,6 @@ async function startServer() {
       return res.status(404).json({ error: 'Campaign not found' });
     }
     res.json({ campaign });
-  });
-
-  // GET /api/transparency (Financial metrics & reports)
-  app.get('/api/transparency', (_req, res) => {
-    const totalRaised = campaigns.reduce((acc, c) => acc + c.raisedAmount, 0) + 250000000;
-    res.json({
-      metrics: {
-        totalRaisedFormatted: `₹25 Cr+`,
-        livesImpactedFormatted: '50K+',
-        activeProjectsCount: campaigns.length + 120,
-        fundAllocation2023: {
-          programs: 80,
-          admin: 12,
-          fundraising: 8
-        }
-      },
-      reports
-    });
   });
 
   // POST /api/contact

@@ -1,4 +1,4 @@
-export type PageTab = 'home' | 'about' | 'campaigns' | 'transparency' | 'contact';
+export type PageTab = 'home' | 'about' | 'campaigns' | 'contact';
 
 export interface Campaign {
   id: string;
@@ -12,17 +12,6 @@ export interface Campaign {
   percentage: number;
   donorsCount: number;
   location: string;
-}
-
-
-export interface FinancialReport {
-  id: string;
-  year: number;
-  title: string;
-  description: string;
-  downloadCount: number;
-  fileSize: string;
-  url: string;
 }
 
 export interface VolunteerApplication {

@@ -36,10 +36,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       {/* Hero Section */}
       <section className="max-w-[1200px] mx-auto px-4 md:px-10 py-12 md:py-20 flex flex-col md:flex-row items-center gap-10">
         <div className="flex-1 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#cee9d3] text-[#012d1d] font-semibold text-xs tracking-wide">
-            <span className="w-2 h-2 rounded-full bg-[#116c4a] animate-pulse"></span>
-            <span>Section 80G Tax-Deductible Non-Profit Foundation</span>
-          </div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-[#012d1d] leading-tight tracking-tight">
             Empowering Communities, Building Futures.
           </h1>

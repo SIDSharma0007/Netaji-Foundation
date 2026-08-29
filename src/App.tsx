@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { PageTab, Campaign, FinancialReport } from './types';
-import { INITIAL_CAMPAIGNS, INITIAL_REPORTS } from './data/initialData';
+import { PageTab, Campaign } from './types';
+import { INITIAL_CAMPAIGNS } from './data/initialData';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomeScreen } from './components/HomeScreen';
 import { AboutScreen } from './components/AboutScreen';
 import { CampaignsScreen } from './components/CampaignsScreen';
-import { TransparencyScreen } from './components/TransparencyScreen';
 import { ContactScreen } from './components/ContactScreen';
 import { VolunteerModal } from './components/VolunteerModal';
-import { ReportViewerModal } from './components/ReportViewerModal';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<PageTab>('home');
   const [campaigns, setCampaigns] = useState<Campaign[]>(INITIAL_CAMPAIGNS);
-  const [reports, setReports] = useState<FinancialReport[]>(INITIAL_REPORTS);
 
   // Modals state
   const [isVolunteerOpen, setIsVolunteerOpen] = useState(false);
-  const [activeReport, setActiveReport] = useState<FinancialReport | null>(null);
 
   // Fetch initial backend data
   useEffect(() => {
@@ -31,16 +27,6 @@ export const App: React.FC = () => {
         }
       })
       .catch(() => console.log('Using default client campaign data'));
-
-    // Fetch transparency reports
-    fetch('/api/transparency')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.reports) {
-          setReports(data.reports);
-        }
-      })
-      .catch(() => console.log('Using default financial reports'));
   }, []);
 
   return (
@@ -70,13 +56,6 @@ export const App: React.FC = () => {
           />
         )}
 
-        {activeTab === 'transparency' && (
-          <TransparencyScreen
-            reports={reports}
-            openReportViewer={(report) => setActiveReport(report)}
-          />
-        )}
-
         {activeTab === 'contact' && (
           <ContactScreen openVolunteerModal={() => setIsVolunteerOpen(true)} />
         )}
@@ -91,11 +70,6 @@ export const App: React.FC = () => {
       <VolunteerModal
         isOpen={isVolunteerOpen}
         onClose={() => setIsVolunteerOpen(false)}
-      />
-
-      <ReportViewerModal
-        report={activeReport}
-        onClose={() => setActiveReport(null)}
       />
     </div>
   );

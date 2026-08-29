@@ -66,7 +66,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
             Contact & Volunteer
           </h1>
           <p className="text-lg text-[#414844] leading-relaxed">
-            Have questions about our initiatives or financial reports? Reach out directly or apply to join our field volunteer team.
+            Have questions about our initiatives or community projects? Reach out directly or apply to join our field volunteer team.
           </p>
         </header>
 
@@ -144,7 +144,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
                   className="w-full bg-[#f8f9fa] border border-[#c1c8c2] rounded-xl px-4 py-2.5 text-sm text-[#181c20] focus:ring-2 focus:ring-[#012d1d] focus:outline-none"
                 >
                   <option value="General Inquiry">General Inquiry</option>
-                  <option value="Audit & Financial Report Query">Audit & Financial Report Query</option>
+                  <option value="Program & Community Query">Program & Community Query</option>
                   <option value="Corporate Partnership">Corporate Partnership</option>
                   <option value="Media & Press Inquiry">Media & Press Inquiry</option>
                 </select>
