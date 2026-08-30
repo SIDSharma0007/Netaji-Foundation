@@ -4,7 +4,7 @@
 [![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Motion](https://img.shields.io/badge/Motion-Animation-f08?style=for-the-badge)](https://motion.dev/)
+[![Lucide Icons](https://img.shields.io/badge/Lucide_Icons-latest-orange?style=for-the-badge&logo=lucide)](https://lucide.dev/)
 
 > **Netaji Foundation** is a modern, high-impact NGO digital platform dedicated to uplifting underserved communities across India. Built on the ideals of selfless service inspired by Netaji Subhash Chandra Bose, the platform drives transparent fundraising campaigns, volunteer recruitment, and community empowerment initiatives.
 
@@ -12,12 +12,12 @@
 
 ## 🌟 Key Features
 
-- **🏛️ Mission & Heritage Showcase**: Rich visual storytelling celebrating community initiatives and the guiding philosophy of selfless service.
+- **🏛️ Mission & Heritage Showcase**: Rich visual storytelling celebrating community initiatives, historical inspiration, and the guiding philosophy of selfless service.
 - **🎯 Dynamic Campaign Management**: Real-time tracking of active campaigns across Education, Healthcare, Environmental Sustainability, and Livelihood Aid with progress indicators and donor metrics.
 - **🤝 Interactive Volunteer Portal**: Streamlined application modal allowing individuals to contribute by selecting their interest areas and availability.
 - **📬 Responsive Contact & Feedback System**: Direct messaging and inquiry processing connected to Next.js API route handlers.
 - **⚡ Next.js App Router Architecture**: Server-side rendered layouts, dynamic routing, metadata for search engine optimization (SEO), and fast client-side transitions.
-- **🎨 Premium UI/UX Design**: Crafted with Tailwind CSS v4, smooth animations powered by Motion, responsive navigation with mobile drawer support, and accessible modal dialogs.
+- **🎨 Modern UI/UX Design**: Clean interface styled with Tailwind CSS v4, smooth native micro-interactions, responsive navigation with mobile drawer support, and accessible modal dialogs.
 - **🔌 RESTful API Endpoints**: Modular backend routes for handling campaigns, volunteer signups, health checks, and user inquiries.
 
 ---
@@ -28,12 +28,10 @@
 |---|---|
 | **Framework** | [Next.js 16 (App Router)](https://nextjs.org/) |
 | **Frontend Library** | [React 19](https://react.dev/) |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) & PostCSS |
-| **Animations** | [Motion (`motion`)](https://motion.dev/) |
+| **Language** | [TypeScript 5.8](https://www.typescriptlang.org/) |
+| **Styling & Design** | [Tailwind CSS v4](https://tailwindcss.com/) & PostCSS |
 | **Iconography** | [Lucide React](https://lucide.dev/) |
-| **AI Integration** | [@google/genai](https://www.npmjs.com/package/@google/genai) |
-| **Data Persistence** | In-memory singleton state provider (`src/lib/db.ts`) |
+| **State & Persistence** | In-memory singleton database store (`src/lib/db.ts`) |
 
 ---
 
@@ -42,24 +40,24 @@
 ```text
 Netaji-Foundation/
 ├── app/                        # Next.js App Router directory
-│   ├── about/                  # About page route
+│   ├── about/                  # About & Mission page route
 │   │   └── page.tsx
 │   ├── api/                    # Serverless API routes
-│   │   ├── campaigns/          # Campaigns API endpoint
-│   │   ├── contact/            # Contact message endpoint
+│   │   ├── campaigns/          # Campaigns data endpoint
+│   │   ├── contact/            # Contact message submission endpoint
 │   │   ├── health/             # Health check endpoint
 │   │   └── volunteer/          # Volunteer registration endpoint
-│   ├── campaigns/              # Campaigns page route
+│   ├── campaigns/              # Active campaigns listing route
 │   │   └── page.tsx
-│   ├── contact/                # Contact page route
+│   ├── contact/                # Contact & inquiries page route
 │   │   └── page.tsx
-│   ├── globals.css             # Global Tailwind CSS imports
+│   ├── globals.css             # Global Tailwind CSS styling
 │   ├── layout.tsx              # Root layout with Navbar, Footer & ModalProvider
-│   ├── loading.tsx             # Global route loading state
+│   ├── loading.tsx             # Global loading fallback
 │   ├── not-found.tsx           # Custom 404 page
-│   └── page.tsx                # Home page route
+│   └── page.tsx                # Homepage
 ├── public/
-│   └── images/                 # Optimized campaign & organizational imagery
+│   └── images/                 # Campaign, initiative & organizational photography
 ├── src/
 │   ├── components/             # Reusable UI screen components
 │   │   ├── AboutScreen.tsx
@@ -71,9 +69,8 @@ Netaji-Foundation/
 │   │   └── VolunteerModal.tsx
 │   ├── context/                # React Context providers (ModalContext)
 │   ├── data/                   # Initial seed data for campaigns
-│   ├── lib/                    # Shared database and utilities
-│   └── types.ts                # TypeScript interfaces and data models
-├── .env.example                # Environment variable template
+│   ├── lib/                    # In-memory database store & server helpers
+│   └── types.ts                # TypeScript data interfaces and types
 ├── next.config.ts              # Next.js configuration
 ├── package.json                # Project dependencies and scripts
 ├── tsconfig.json               # TypeScript configuration
@@ -92,8 +89,8 @@ Netaji-Foundation/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/netaji-foundation.git
-cd netaji-foundation
+git clone https://github.com/SIDSharma0007/Netaji-Foundation.git
+cd Netaji-Foundation
 ```
 
 ### 2. Install Dependencies
@@ -102,23 +99,7 @@ cd netaji-foundation
 npm install
 ```
 
-### 3. Configure Environment Variables *(Optional)*
-
-The core website, campaigns, volunteer registration, and contact forms work out-of-the-box without any API keys. If you wish to configure environment variables, copy `.env.example` to `.env.local`:
-
-```bash
-cp .env.example .env.local
-```
-
-```env
-# Optional (Reserved for future AI features)
-GEMINI_API_KEY="your_gemini_api_key_here"
-
-# Application URL (Defaults to http://localhost:3000)
-APP_URL="http://localhost:3000"
-```
-
-### 4. Run the Development Server
+### 3. Run the Development Server
 
 ```bash
 npm run dev
@@ -132,9 +113,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Starts the Next.js development server with hot-reloading |
-| `npm run build` | Builds the optimized production build |
-| `npm run start` | Starts the production server |
+| `npm run dev` | Starts the Next.js development server on `http://localhost:3000` |
+| `npm run build` | Builds the optimized production application |
+| `npm run start` | Starts the Next.js production server |
 | `npm run lint` | Runs TypeScript type checking (`tsc --noEmit`) |
 
 ---
@@ -144,9 +125,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/health` | Service health status and timestamp |
-| `GET` | `/api/campaigns` | List all active humanitarian campaigns |
-| `POST` | `/api/volunteer` | Submit a volunteer application |
-| `POST` | `/api/contact` | Submit a general inquiry or contact form |
+| `GET` | `/api/campaigns` | Returns list of all active humanitarian campaigns |
+| `POST` | `/api/volunteer` | Submits a new volunteer application |
+| `POST` | `/api/contact` | Submits a contact inquiry / feedback message |
 
 ---
 
@@ -164,7 +145,7 @@ Contributions are welcome! If you'd like to improve the platform or add features
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
