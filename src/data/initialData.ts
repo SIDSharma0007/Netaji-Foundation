@@ -3,42 +3,30 @@ import { Campaign } from '../types';
 export const INITIAL_CAMPAIGNS: Campaign[] = [
   {
     id: 'c1',
-    title: 'Rural Literacy Initiative',
-    category: 'Education',
-    description: 'Providing essential reading materials, solar lamps, and building mobile libraries for remote village schools across Uttar Pradesh and Bihar to ensure children have access to quality education.',
-    imageUrl: '/images/rural-literacy.jpg',
-    imageAlt: 'Indian village school children reading illustrated books in rural classroom',
-    goalAmount: 1000000,
-    raisedAmount: 750000,
-    percentage: 75,
-    donorsCount: 420,
-    location: 'UP & Bihar Rural Belt'
+    title: 'Winter Blanket & Warmth Relief Drive',
+    category: 'Livelihood',
+    description: 'Providing high-quality winter blankets, warm clothing, and essential shelter kits to homeless and underprivileged families across Jamshedpur and surrounding rural districts during extreme cold spells.',
+    imageUrl: '/images/hero-elderly-relief.jpg',
+    imageAlt: 'Netaji Subhash Chandra Bose Seva Samity volunteers distributing warm blankets to elderly community members',
+    location: 'Jamshedpur & East Singhbhum'
   },
   {
     id: 'c2',
-    title: 'Clean Water & Filtration Access',
+    title: 'Blood Donation & TMH Patient Support',
     category: 'Health',
-    description: 'Installing sustainable solar water filtration units and community taps in drought-affected villages across Bundelkhand and Rajasthan to prevent waterborne diseases.',
-    imageUrl: '/images/clean-water-access.jpg',
-    imageAlt: 'Mother and school girl filling clean water container from village filtration tap',
-    goalAmount: 1500000,
-    raisedAmount: 600000,
-    percentage: 40,
-    donorsCount: 310,
-    location: 'Bundelkhand & Rajasthan Arid Belt'
+    description: 'Organizing voluntary blood donation camps and direct fruit/nutrition distribution for patients and attendants at Tata Main Hospital (TMH) and regional health centers.',
+    imageUrl: '/images/blood-donation-tmh.jpg',
+    imageAlt: 'Netaji Subhash Chandra Bose Seva Samity blood donation drive and TMH patient nutrition distribution in Jamshedpur',
+    location: 'Tata Main Hospital & Jamshedpur'
   },
   {
     id: 'c3',
-    title: 'Urban Forestry & Green Zones',
-    category: 'Environment',
-    description: 'Transforming degraded urban lands into thriving Miyawaki forests and community gardens in NCR, Bengaluru, and Pune to improve air quality and urban ecology.',
-    imageUrl: '/images/urban-forestry.jpg',
-    imageAlt: 'Youth environmental volunteers planting tree saplings during community greening drive',
-    goalAmount: 800000,
-    raisedAmount: 720000,
-    percentage: 90,
-    donorsCount: 580,
-    location: 'NCR, Bengaluru & Pune Metro Zones'
+    title: "Underprivileged Daughters' Marriage Assistance",
+    category: 'Livelihood',
+    description: 'Providing crucial financial aid, household provisions, and community support for the solemn marriage ceremonies of young women from economically distressed families.',
+    imageUrl: '/images/daughters-marriage-aid.jpg',
+    imageAlt: 'Netaji Subhash Chandra Bose Seva Samity mass marriage assistance ceremony providing wedding provisions in Jharkhand',
+    location: 'East Singhbhum & Regional Jharkhand'
   },
   {
     id: 'c4',
@@ -46,11 +34,7 @@ export const INITIAL_CAMPAIGNS: Campaign[] = [
     category: 'Livelihood',
     description: 'Providing essential nutritional sustenance, mobility support, and emergency door-to-door relief to persons with disabilities and marginalized families in local neighborhoods.',
     imageUrl: '/images/disability-community-aid.jpg',
-    imageAlt: 'Netaji Foundation volunteers providing doorstep relief to differently-abled community member',
-    goalAmount: 1200000,
-    raisedAmount: 780000,
-    percentage: 65,
-    donorsCount: 410,
+    imageAlt: 'Netaji Subhash Chandra Bose Seva Samity volunteers providing doorstep relief to differently-abled community member',
     location: 'Jamshedpur & Jharkhand Belt'
   }
 ];

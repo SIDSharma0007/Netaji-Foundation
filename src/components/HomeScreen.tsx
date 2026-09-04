@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Campaign, PageTab } from '../types';
-import { Users, TrendingUp, CheckCircle, ArrowRight } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 interface HomeScreenProps {
@@ -20,12 +20,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
   const campaigns = propCampaigns || modalContext.campaigns;
 
-  const handleNavigate = (path: string, tab: PageTab) => {
-    if (propSetActiveTab) {
-      propSetActiveTab(tab);
-    } else {
-      router.push(path);
-    }
+  const handleNavigate = (path: string) => {
+    router.push(path);
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -36,22 +32,26 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       {/* Hero Section */}
       <section className="max-w-[1200px] mx-auto px-4 md:px-10 py-12 md:py-20 flex flex-col md:flex-row items-center gap-10">
         <div className="flex-1 space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#cee9d3] text-[#012d1d] font-semibold text-xs tracking-wide">
+            <span className="w-2 h-2 rounded-full bg-[#116c4a]"></span>
+            <span>Serving Communities Since 2002</span>
+          </div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-[#012d1d] leading-tight tracking-tight">
-            Empowering Communities, Building Futures.
+            Netaji Subhash Chandra Bose Seva Samity
           </h1>
           <p className="text-lg text-[#414844] max-w-[520px] leading-relaxed">
-            We are dedicated to sustainable community development, providing resources and education to those who need it most. Join us in creating lasting change through focused action and unwavering integrity.
+            Over two decades of selfless grassroots service across Jharkhand. From winter blanket distribution and regular blood donation camps to hospital patient aid and poor daughters' marriage support.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
             <button
-              onClick={() => handleNavigate('/campaigns', 'campaigns')}
+              onClick={() => handleNavigate('/campaigns')}
               className="bg-[#012d1d] hover:bg-[#1b4332] text-white font-semibold text-sm px-6 py-3.5 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer active:scale-95"
             >
               <span>Get Involved</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <button
-              onClick={() => handleNavigate('/about', 'about')}
+              onClick={() => handleNavigate('/about')}
               className="border border-[#012d1d] text-[#012d1d] hover:bg-[#ebeef3] font-semibold text-sm px-6 py-3.5 rounded-lg transition-all cursor-pointer"
             >
               Learn More
@@ -63,7 +63,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-md border border-[#e0e3e8] group">
             <img
               src="/images/hero-elderly-relief.jpg"
-              alt="Netaji Foundation leadership and volunteers distributing essential food and healthcare packets to elderly beneficiaries"
+              alt="Netaji Subhash Chandra Bose Seva Samity leadership and volunteers distributing essential relief"
               className="w-full h-full object-cover object-[center_35%] group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -80,60 +80,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
       </section>
 
-      {/* Metrics Section */}
-      <section className="bg-[#f1f4f9] py-16 border-y border-[#e0e3e8]">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 flex items-center gap-5 shadow-xs hover:border-[#116c4a] transition-all">
-              <div className="p-4 bg-[#cee9d3] text-[#012d1d] rounded-2xl">
-                <Users className="w-8 h-8" />
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-[#012d1d]">50K+</p>
-                <p className="text-xs font-semibold text-[#414844] uppercase tracking-wider mt-1">
-                  People Helped
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 flex items-center gap-5 shadow-xs hover:border-[#116c4a] transition-all">
-              <div className="p-4 bg-[#cee9d3] text-[#012d1d] rounded-2xl">
-                <TrendingUp className="w-8 h-8" />
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-[#012d1d]">₹25 Cr+</p>
-                <p className="text-xs font-semibold text-[#414844] uppercase tracking-wider mt-1">
-                  Funds Raised
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 flex items-center gap-5 shadow-xs hover:border-[#116c4a] transition-all">
-              <div className="p-4 bg-[#cee9d3] text-[#012d1d] rounded-2xl">
-                <CheckCircle className="w-8 h-8" />
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-[#012d1d]">124</p>
-                <p className="text-xs font-semibold text-[#414844] uppercase tracking-wider mt-1">
-                  Active Projects
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Campaigns Preview */}
-      <section className="max-w-[1200px] mx-auto px-4 md:px-10 py-16">
+      <section className="max-w-[1200px] mx-auto px-4 md:px-10 py-16 border-t border-[#e0e3e8]">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <h2 className="text-3xl font-bold text-[#012d1d]">Active Community Campaigns</h2>
             <p className="text-base text-[#414844] mt-2">
-              Explore ongoing initiatives and directly fund sustainable development projects.
+              Explore ongoing initiatives and directly support grassroots development projects.
             </p>
           </div>
           <button
-            onClick={() => handleNavigate('/campaigns', 'campaigns')}
+            onClick={() => handleNavigate('/campaigns')}
             className="text-sm font-bold text-[#012d1d] hover:text-[#116c4a] flex items-center gap-1 cursor-pointer"
           >
             <span>View All Campaigns</span>
@@ -158,34 +115,25 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 </span>
               </div>
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-[#012d1d] mb-2">{campaign.title}</h3>
-                <p className="text-sm text-[#414844] mb-6 line-clamp-3 leading-relaxed flex-grow">
+                <h3 className="text-xl font-bold text-[#012d1d] mb-2 min-h-[3.5rem] flex items-center leading-snug">
+                  {campaign.title}
+                </h3>
+                <p className="text-sm text-[#414844] mb-6 line-clamp-3 leading-relaxed flex-grow min-h-[4.5rem]">
                   {campaign.description}
                 </p>
 
-                <div className="mt-auto space-y-3 pt-4 border-t border-[#e9ecef]">
-                  <div className="flex justify-between items-center text-xs font-semibold">
-                    <span className="text-[#012d1d]">Funding Goal</span>
-                    <span className="text-[#414844]">{campaign.percentage}% Goal Met</span>
+                <div className="mt-auto pt-4 border-t border-[#e9ecef] flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-1.5 min-w-0 flex-1 text-xs text-[#717973] font-medium">
+                    <MapPin className="w-3.5 h-3.5 text-[#116c4a] shrink-0" />
+                    <span className="truncate" title={campaign.location}>{campaign.location}</span>
                   </div>
-                  <div className="w-full bg-[#e0e3e8] rounded-full h-2 overflow-hidden">
-                    <div
-                      className="bg-[#012d1d] h-2 rounded-full transition-all duration-500"
-                      style={{ width: `${campaign.percentage}%` }}
-                    ></div>
-                  </div>
-                  <div className="pt-2 flex items-center justify-between">
-                    <span className="text-xs text-[#717973]">
-                      ₹{campaign.raisedAmount.toLocaleString('en-IN')} raised
-                    </span>
-                    <button
-                      onClick={() => handleNavigate('/campaigns', 'campaigns')}
-                      className="bg-[#012d1d] text-white hover:bg-[#1b4332] text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
-                    >
-                      <span>View Campaign</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#a1f4c8]" />
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => handleNavigate('/campaigns')}
+                    className="bg-[#012d1d] hover:bg-[#1b4332] text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap shrink-0 h-9"
+                  >
+                    <span>View Campaign</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#a1f4c8]" />
+                  </button>
                 </div>
               </div>
             </div>

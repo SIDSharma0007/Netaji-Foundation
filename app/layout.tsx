@@ -6,23 +6,29 @@ import { Footer } from '@/src/components/Footer';
 import { ModalProvider } from '@/src/context/ModalContext';
 
 export const metadata: Metadata = {
-  title: 'Netaji Foundation - Empowering Communities, Building Futures',
-  description: 'Empowering local communities through sustainable development, education, and health initiatives.',
+  title: 'Netaji Subhash Chandra Bose Seva Samity | Grassroots Social Welfare',
+  description: 'Established in 2002 in Jamshedpur, Jharkhand. Dedicated to blanket distribution, blood donation drives, hospital patient aid, and marriage support for daughters of the poor.',
   keywords: [
-    'Netaji Foundation',
-    'NGO',
-    'Non-Profit',
+    'Netaji Subhash Chandra Bose Seva Samity',
+    'Netaji Foundation Jamshedpur',
+    'NGO Jharkhand',
     'Community Development',
-    'Rural Literacy',
-    'Clean Water India'
+    'Blood Donation Jamshedpur',
+    'Tata Main Hospital Aid',
+    'Blanket Donation Drive'
   ],
-  authors: [{ name: 'Netaji Foundation' }],
+  authors: [{ name: 'Netaji Subhash Chandra Bose Seva Samity' }],
+  icons: {
+    icon: '/images/netaji-logo.png',
+    shortcut: '/images/netaji-logo.png',
+    apple: '/images/netaji-logo.png',
+  },
   openGraph: {
-    title: 'Netaji Foundation - Empowering Communities, Building Futures',
-    description: 'Empowering local communities through sustainable development, education, and health initiatives.',
+    title: 'Netaji Subhash Chandra Bose Seva Samity | Grassroots Social Welfare',
+    description: 'Established in 2002 in Jamshedpur, Jharkhand. Dedicated to blanket distribution, blood donation drives, hospital patient aid, and marriage support for daughters of the poor.',
     type: 'website',
-    locale: 'en_US',
-    siteName: 'Netaji Foundation'
+    locale: 'en_IN',
+    siteName: 'Netaji Subhash Chandra Bose Seva Samity'
   }
 };
 

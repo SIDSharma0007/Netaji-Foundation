@@ -10,15 +10,13 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
-    "@google/genai": "^2.4.0",
     "@tailwindcss/postcss": "^4.3.3",
-    "dotenv": "^17.2.3",
     "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
     "next": "^16.3.2",
     "postcss": "^8.5.26",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
+    "resend": "^6.26.0",
     "tailwindcss": "^4.1.14"
   },
   "devDependencies": {

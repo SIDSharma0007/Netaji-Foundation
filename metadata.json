@@ -1,6 +1,6 @@
 {
-  "name": "Netaji Foundation",
-  "description": "Empowering local communities through sustainable development, education, and health initiatives.",
+  "name": "Netaji Subhash Chandra Bose Seva Samity",
+  "description": "Established in 2002 in Jamshedpur, Jharkhand. Dedicated to selfless grassroots social welfare, blood donation, hospital aid, and community development.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

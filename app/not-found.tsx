@@ -1,12 +1,16 @@
 import Link from 'next/link';
-import { Sprout, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="text-center max-w-md bg-white border border-[#e0e3e8] rounded-2xl p-8 shadow-xs space-y-4">
-        <div className="w-12 h-12 rounded-full bg-[#cee9d3] text-[#012d1d] flex items-center justify-center mx-auto">
-          <Sprout className="w-6 h-6" />
+        <div className="w-16 h-16 rounded-full overflow-hidden bg-white shadow-xs border border-[#e0e3e8] flex items-center justify-center mx-auto p-1">
+          <img
+            src="/images/netaji-logo.png"
+            alt="Netaji Subhash Chandra Bose Seva Samity Official Logo"
+            className="w-full h-full object-contain"
+          />
         </div>
         <h1 className="text-3xl font-extrabold text-[#012d1d]">Page Not Found</h1>
         <p className="text-sm text-[#414844]">

@@ -7,10 +7,6 @@ export interface Campaign {
   description: string;
   imageUrl: string;
   imageAlt?: string;
-  goalAmount: number;
-  raisedAmount: number;
-  percentage: number;
-  donorsCount: number;
   location: string;
 }
 

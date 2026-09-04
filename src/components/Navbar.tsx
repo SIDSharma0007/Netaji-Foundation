@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { PageTab } from '../types';
-import { Menu, X, Sprout, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
   activeTab?: PageTab;
@@ -18,27 +18,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const navLinks: { label: string; tab: PageTab; href: string }[] = [
-    { label: 'Home', tab: 'home', href: '/' },
-    { label: 'About', tab: 'about', href: '/about' },
-    { label: 'Campaigns', tab: 'campaigns', href: '/campaigns' },
-    { label: 'Contact', tab: 'contact', href: '/contact' },
+  const navLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Campaigns', href: '/campaigns' },
+    { label: 'Contact', href: '/contact' },
   ];
 
-  const getIsActive = (link: { tab: PageTab; href: string }) => {
-    if (propActiveTab) {
-      return propActiveTab === link.tab;
-    }
-    if (link.href === '/') {
+  const getIsActive = (href: string) => {
+    if (href === '/') {
       return pathname === '/';
     }
-    return pathname.startsWith(link.href);
+    return pathname.startsWith(href);
   };
 
-  const handleNavClick = (tab: PageTab) => {
-    if (propSetActiveTab) {
-      propSetActiveTab(tab);
-    }
+  const handleNavClick = () => {
     setMobileMenuOpen(false);
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -51,24 +45,28 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Brand Logo */}
         <Link
           href="/"
-          onClick={() => handleNavClick('home')}
-          className="font-bold text-2xl text-[#012d1d] flex items-center gap-2.5 tracking-tight hover:opacity-90 transition-opacity text-left cursor-pointer"
+          onClick={handleNavClick}
+          className="font-bold text-lg md:text-xl text-[#012d1d] flex items-center gap-3 tracking-tight hover:opacity-90 transition-opacity text-left cursor-pointer group"
         >
-          <div className="w-10 h-10 rounded-full bg-[#012d1d] flex items-center justify-center text-white shadow-xs">
-            <Sprout className="w-5 h-5 text-[#a1f4c8]" />
+          <div className="w-12 h-12 rounded-full overflow-hidden bg-white shadow-xs border border-[#e0e3e8] flex items-center justify-center shrink-0 p-0.5 group-hover:scale-105 transition-transform">
+            <img
+              src="/images/netaji-logo.png"
+              alt="Netaji Subhash Chandra Bose Seva Samity Official Logo"
+              className="w-full h-full object-contain"
+            />
           </div>
-          <span>Netaji Foundation</span>
+          <span className="leading-tight">Netaji Subhash Chandra Bose Seva Samity</span>
         </Link>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {
-            const isActive = getIsActive(link);
+            const isActive = getIsActive(link.href);
             return (
               <Link
-                key={link.tab}
+                key={link.href}
                 href={link.href}
-                onClick={() => handleNavClick(link.tab)}
+                onClick={handleNavClick}
                 className={`font-semibold text-sm transition-all duration-200 py-1 cursor-pointer ${
                   isActive
                     ? 'text-[#012d1d] font-bold border-b-2 border-[#012d1d]'
@@ -85,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="hidden md:flex items-center gap-3">
           <Link
             href="/contact"
-            onClick={() => handleNavClick('contact')}
+            onClick={handleNavClick}
             className="bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors min-h-[44px] flex items-center gap-2 shadow-xs cursor-pointer active:scale-95"
           >
             <span>Get Involved</span>
@@ -109,12 +107,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#f7f9ff] border-b border-[#e0e3e8] px-6 py-4 flex flex-col gap-3 shadow-lg animate-in slide-in-from-top-2">
           {navLinks.map((link) => {
-            const isActive = getIsActive(link);
+            const isActive = getIsActive(link.href);
             return (
               <Link
-                key={link.tab}
+                key={link.href}
                 href={link.href}
-                onClick={() => handleNavClick(link.tab)}
+                onClick={handleNavClick}
                 className={`text-left py-2 px-3 rounded-lg text-base font-semibold transition-colors ${
                   isActive
                     ? 'bg-[#1b4332] text-white'
