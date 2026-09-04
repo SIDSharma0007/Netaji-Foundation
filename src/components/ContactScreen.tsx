@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, UserPlus, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, UserPlus, ShieldCheck, AlertCircle } from 'lucide-react';
 import { useModal } from '../context/ModalContext';
 
 interface ContactScreenProps {
@@ -14,8 +14,10 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('General Inquiry');
   const [message, setMessage] = useState('');
+  const [botcheck, setBotcheck] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedMessage, setSubmittedMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const modalContext = useModal();
 
   const handleOpenVolunteer = () => {
@@ -29,6 +31,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
 
     try {
       const res = await fetch('/api/contact', {
@@ -39,20 +42,23 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
           lastName,
           email,
           subject,
-          message
-        })
+          message,
+          botcheck,
+        }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (res.ok) {
         setSubmittedMessage(data.message || 'Message sent successfully!');
         setFirstName('');
         setLastName('');
         setEmail('');
         setMessage('');
+      } else {
+        setErrorMessage(data.error || 'Failed to send message. Please try again or contact us directly.');
       }
     } catch (err) {
-      console.error(err);
+      setErrorMessage('Network connection error. Please check your internet connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -78,7 +84,22 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
             </div>
             <button
               onClick={() => setSubmittedMessage(null)}
-              className="text-xs text-[#012d1d] font-bold underline"
+              className="text-xs text-[#012d1d] font-bold underline cursor-pointer"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
+
+        {errorMessage && (
+          <div className="mb-8 p-4 bg-[#fde8e8] border border-[#f8b4b4] text-[#9b1c1c] rounded-2xl flex items-center justify-between">
+            <div className="flex items-center gap-2 font-semibold text-sm">
+              <AlertCircle className="w-5 h-5 text-[#c81e1e] shrink-0" />
+              <span>{errorMessage}</span>
+            </div>
+            <button
+              onClick={() => setErrorMessage(null)}
+              className="text-xs text-[#9b1c1c] font-bold underline cursor-pointer"
             >
               Dismiss
             </button>
@@ -91,6 +112,20 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
             <h2 className="text-2xl font-bold text-[#012d1d] mb-6">Get in Touch</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Anti-spam honeypot (hidden from human visitors) */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="contact_website_hp">Leave this field blank</label>
+                <input
+                  id="contact_website_hp"
+                  type="text"
+                  name="website_hp"
+                  value={botcheck}
+                  onChange={(e) => setBotcheck(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-[#012d1d] uppercase tracking-wider mb-1.5">
@@ -191,9 +226,9 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-[#a1f4c8] shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-white">National Headquarters</p>
+                      <p className="font-semibold text-white">Registered Head Office</p>
                       <p className="text-xs text-white/80">
-                        Netaji Foundation Bhavan, 12/A Subhash Chandra Bose Marg, Connaught Place, New Delhi, Delhi 110001, India
+                        Simul Road, Tinplate, Post: Golmuri, Jamshedpur, East Singhbhum, Jharkhand – 831001, India
                       </p>
                     </div>
                   </div>
@@ -202,15 +237,17 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
                     <Mail className="w-5 h-5 text-[#a1f4c8] shrink-0" />
                     <div>
                       <p className="font-semibold text-white">Email Us</p>
-                      <p className="text-xs text-white/80">contact@netajifoundation.org</p>
+                      <a href="mailto:netajisubhasbosesevasamiti@gmail.com" className="text-xs text-white/80 hover:text-white hover:underline transition-colors">
+                        netajisubhasbosesevasamiti@gmail.com
+                      </a>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-[#a1f4c8] shrink-0" />
                     <div>
-                      <p className="font-semibold text-white">Call Office</p>
-                      <p className="text-xs text-white/80">+91 11 2345 6789 / +91 98765 43210</p>
+                      <p className="font-semibold text-white">Call Office / Helpline</p>
+                      <p className="text-xs text-white/80">+91 7667936652</p>
                     </div>
                   </div>
                 </div>
@@ -218,7 +255,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
                 <div className="pt-4 border-t border-white/20">
                   <div className="flex items-center gap-2 text-xs text-white/90 font-medium">
                     <ShieldCheck className="w-4 h-4 text-[#a1f4c8]" />
-                    <span>Office hours: Monday - Saturday, 9:30 AM - 6:00 PM IST</span>
+                    <span>Office hours: Monday - Saturday, 10:00 AM - 6:00 PM IST</span>
                   </div>
                 </div>
               </div>
@@ -229,7 +266,7 @@ export const ContactScreen: React.FC<ContactScreenProps> = ({ openVolunteerModal
               <div>
                 <h3 className="font-bold text-[#012d1d] text-lg">Join Our Team</h3>
                 <p className="text-xs text-[#012d1d]/80 mt-1">
-                  Become an active field or digital volunteer for Netaji Foundation.
+                  Become an active field or social welfare volunteer for Netaji Subhash Chandra Bose Seva Samity.
                 </p>
               </div>
               <button

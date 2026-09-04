@@ -22,7 +22,7 @@ export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
     modalContext.openVolunteerModal();
   };
 
-  const categories = ['All', 'Education', 'Health', 'Environment', 'Livelihood'];
+  const categories = ['All', 'Health', 'Livelihood'];
 
   const filteredCampaigns = campaigns.filter((campaign) => {
     const matchesCategory = selectedCategory === 'All' || campaign.category === selectedCategory;
@@ -130,35 +130,11 @@ export const CampaignsScreen: React.FC<CampaignsScreenProps> = ({
                     {campaign.description}
                   </p>
 
-                  {/* Goal Progress */}
+                  {/* Card Action & Details */}
                   <div className="mt-auto pt-4 border-t border-[#e9ecef] space-y-3">
-                    <div className="flex justify-between items-end">
-                      <span className="text-xs font-bold text-[#012d1d]">Funding Goal</span>
-                      <span className="text-xs font-semibold text-[#414844]">
-                        {campaign.percentage}%
-                      </span>
-                    </div>
-
-                    <div className="w-full bg-[#e0e3e8] rounded-full h-2 overflow-hidden">
-                      <div
-                        className="bg-[#012d1d] h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${campaign.percentage}%` }}
-                      ></div>
-                    </div>
-
-                    <div className="flex items-center justify-between text-xs pt-1">
-                      <div>
-                        <span className="font-bold text-[#012d1d]">
-                          ₹{campaign.raisedAmount.toLocaleString('en-IN')}
-                        </span>
-                        <span className="text-[#717973]"> of ₹{campaign.goalAmount.toLocaleString('en-IN')}</span>
-                      </div>
-                      <span className="text-[#717973] font-medium">{campaign.donorsCount} Donors</span>
-                    </div>
-
                     <button
                       onClick={handleVolunteer}
-                      className="w-full mt-3 bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-98"
+                      className="w-full bg-[#012d1d] text-white hover:bg-[#1b4332] font-semibold text-sm py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-98"
                     >
                       <Users className="w-4 h-4 text-[#a1f4c8]" />
                       <span>Volunteer for Campaign</span>

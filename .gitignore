@@ -11,3 +11,8 @@ next-env.d.ts
 *.tsbuildinfo
 AGENTS.md
 CLAUDE.md
+.vscode/
+.idea/
+.turbo/
+*.local
+
