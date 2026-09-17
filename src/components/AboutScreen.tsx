@@ -3,7 +3,8 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { PageTab } from '../types';
-import { Shield, Sprout, Users, ArrowRight } from 'lucide-react';
+import { Shield, Sprout, Users, ArrowRight, Phone, Mail, Award } from 'lucide-react';
+import { LEADERSHIP_MEMBERS } from '../data/leadershipData';
 
 interface AboutScreenProps {
   setActiveTab?: (tab: PageTab) => void;
@@ -54,7 +55,7 @@ export const AboutScreen: React.FC<AboutScreenProps> = () => {
                 Our History & Inception
               </h2>
               <p className="text-base text-[#414844] leading-relaxed">
-                Established in <strong>2002</strong> by Chairperson <strong>Goutam Dey</strong>, Netaji Subhash Chandra Bose Seva Samity was formally inaugurated by distinguished community leaders <strong>Anand Bihari Dubey</strong>, <strong>Rakeshwar Pandey</strong> (National Secretary, INTUC – Indian National Trade Union Congress), and <strong>Babar Khan</strong>.
+                Established in <strong>2002</strong> by Chairperson <strong>Goutam Dey</strong>, Netaji Subhash Chandra Bose Seva Samity was formally inaugurated by distinguished community leaders <strong>Anand Bihari Dubey</strong> (now National Vice President), <strong>Rakeshwar Pandey</strong> (National Secretary, INTUC – Indian National Trade Union Congress), and <strong>Babar Khan</strong>.
               </p>
               <p className="text-base text-[#414844] leading-relaxed">
                 For more than two decades, the Samity has remained at the forefront of direct public welfare: organizing extensive winter blanket donation drives, regular blood donation camps, fruit and nutrition distribution at Tata Main Hospital (TMH), financial assistance for marriages of daughters from impoverished families, and comprehensive community disaster relief.
@@ -126,81 +127,144 @@ export const AboutScreen: React.FC<AboutScreenProps> = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 shadow-xs hover:border-[#012d1d] transition-all flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-lg mb-4">
-                GD
-              </div>
-              <h3 className="text-xl font-bold text-[#012d1d]">Goutam Dey</h3>
-              <p className="text-xs font-semibold text-[#116c4a] uppercase tracking-wider mt-0.5">Chairperson & Founder</p>
-              <p className="text-xs text-[#414844] mt-3 leading-relaxed">
-                Founding leader who established the Samity in 2002 to lead grassroots social and medical relief across Jharkhand.
-              </p>
-            </div>
-          </div>
+          {LEADERSHIP_MEMBERS.map((leader) => (
+            <div
+              key={leader.id}
+              className="bg-white border border-[#e0e3e8] rounded-2xl p-6 shadow-xs hover:border-[#012d1d] transition-all flex flex-col justify-between"
+            >
+              <div>
+                {leader.imageUrl ? (
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden border border-[#cee9d3] shadow-xs mb-4 shrink-0 bg-[#cee9d3]">
+                    <img
+                      src={leader.imageUrl}
+                      alt={leader.imageAlt || leader.name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-xl bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-lg mb-4">
+                    {leader.initials}
+                  </div>
+                )}
+                <h3 className="text-xl font-bold text-[#012d1d]">{leader.name}</h3>
+                <p className="text-xs font-semibold text-[#116c4a] uppercase tracking-wider mt-0.5">{leader.role}</p>
 
-          <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 shadow-xs hover:border-[#012d1d] transition-all flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-lg mb-4">
-                SB
-              </div>
-              <h3 className="text-xl font-bold text-[#012d1d]">Supriyo Bhattacharya</h3>
-              <p className="text-xs font-semibold text-[#116c4a] uppercase tracking-wider mt-0.5">National President</p>
-              <p className="text-xs text-[#414844] mt-3 leading-relaxed">
-                National President of the Foundation, JMM Central Secretary, and prominent public spokesperson championing community rights.
-              </p>
-            </div>
-          </div>
+                {leader.badges && leader.badges.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-2.5">
+                    {leader.badges.map((badge, idx) => (
+                      <span
+                        key={idx}
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-[#cee9d3]/60 text-[#012d1d] border border-[#a5d0b9]/40"
+                      >
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
-          <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 shadow-xs hover:border-[#012d1d] transition-all flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-lg mb-4">
-                NS
-              </div>
-              <h3 className="text-xl font-bold text-[#012d1d]">Nantu Sarkar</h3>
-              <p className="text-xs font-semibold text-[#116c4a] uppercase tracking-wider mt-0.5">National Secretary & Samaj Sevak</p>
-              <p className="text-xs text-[#414844] mt-3 leading-relaxed">
-                Dedicated social worker and National Secretary overseeing volunteer field operations and grassroots outreach.
-              </p>
-            </div>
-          </div>
+                <p className="text-xs text-[#414844] mt-3 leading-relaxed">
+                  {leader.bio}
+                </p>
 
-          <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 shadow-xs hover:border-[#012d1d] transition-all flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-lg mb-4">
-                SB
+                {leader.quote && (
+                  <div className="mt-3 p-2.5 rounded-xl bg-[#f4fbf7] border border-[#cee9d3] text-[11px] text-[#012d1d] italic">
+                    <span>"{leader.quote}"</span>
+                    {leader.quoteAuthor && (
+                      <span className="block text-[10px] font-bold text-[#116c4a] not-italic mt-1">
+                        — {leader.quoteAuthor}
+                      </span>
+                    )}
+                  </div>
+                )}
               </div>
-              <h3 className="text-xl font-bold text-[#012d1d]">Sourav Biswas</h3>
-              <p className="text-xs font-semibold text-[#116c4a] uppercase tracking-wider mt-0.5">National Spokesperson & Advisory Board</p>
-              <p className="text-xs text-[#414844] mt-3 leading-relaxed">
-                National Spokesperson, National Secretary, and member of the Advisory Board driving institutional collaborations.
-              </p>
-            </div>
-          </div>
 
-          <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 shadow-xs hover:border-[#012d1d] transition-all flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-lg mb-4">
-                SD
-              </div>
-              <h3 className="text-xl font-bold text-[#012d1d]">Soummodeep Dey</h3>
-              <p className="text-xs font-semibold text-[#116c4a] uppercase tracking-wider mt-0.5">Co-Founder</p>
-              <p className="text-xs text-[#414844] mt-3 leading-relaxed">
-                Co-Founder spearheading youth mobilization, digital awareness, and strategic community development.
-              </p>
-            </div>
-          </div>
+              {(leader.phone || leader.email) && (
+                <div className="mt-4 pt-3 border-t border-[#e0e3e8] space-y-1.5 text-xs text-[#414844]">
+                  {leader.phone && leader.phone.length > 0 && (
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <Phone className="w-3.5 h-3.5 text-[#116c4a] shrink-0" />
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        {leader.phone.map((ph, idx) => (
+                          <React.Fragment key={idx}>
+                            <a
+                              href={`tel:${ph.replace(/[^0-9+]/g, '')}`}
+                              className="font-medium text-[#012d1d] hover:text-[#116c4a] hover:underline transition-colors cursor-pointer"
+                              title={`Call ${leader.name}`}
+                            >
+                              {ph}
+                            </a>
+                            {idx < leader.phone!.length - 1 && (
+                              <span className="text-[#a0aec0]">•</span>
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
-          <div className="bg-white border border-[#e0e3e8] rounded-2xl p-6 shadow-xs hover:border-[#012d1d] transition-all flex flex-col justify-between">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-[#cee9d3] text-[#012d1d] flex items-center justify-center font-bold text-lg mb-4">
-                DD
+                  {leader.email && (
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-3.5 h-3.5 text-[#116c4a] shrink-0" />
+                      <a
+                        href={`mailto:${leader.email}`}
+                        className="font-medium text-[#012d1d] hover:text-[#116c4a] hover:underline transition-colors truncate cursor-pointer"
+                        title={`Email ${leader.name}`}
+                      >
+                        {leader.email}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Civic Leadership & Distinguished Recognition Showcase */}
+      <section className="max-w-[1200px] mx-auto px-4 md:px-10 py-8">
+        <div className="bg-white border border-[#e0e3e8] rounded-3xl overflow-hidden shadow-md">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-5 bg-[#012d1d] relative aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden group">
+              <img
+                src="/images/anand-bihari-dubey-felicitation.jpg"
+                alt="National Vice President Anand Bihari Dubey presenting sacred Maa Durga memento to Rahul Gandhi"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white text-xs font-semibold">
+                <span className="w-2 h-2 rounded-full bg-[#a1f4c8] animate-pulse"></span>
+                <span>Civic Felicitation • Sacred Maa Durga Memento</span>
               </div>
-              <h3 className="text-xl font-bold text-[#012d1d]">Durga Dey</h3>
-              <p className="text-xs font-semibold text-[#116c4a] uppercase tracking-wider mt-0.5">National Vice President</p>
-              <p className="text-xs text-[#414844] mt-3 leading-relaxed">
-                National Vice President championing women empowerment, marriage assistance for daughters of the poor, and child welfare.
+            </div>
+
+            <div className="lg:col-span-7 p-6 md:p-10 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#cee9d3] text-[#012d1d] font-bold text-xs">
+                <span>Public Recognition & Civic Engagement</span>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-[#012d1d] tracking-tight leading-snug">
+                Honoring Service, Elevating Community Representation
+              </h3>
+              <p className="text-sm text-[#414844] leading-relaxed">
+                Throughout more than two decades of public dedication, Netaji Subhash Chandra Bose Seva Samity’s leadership has consistently interfaced with prominent national and state representatives to advocate for grassroots social welfare, sports infrastructure, and aid for vulnerable families across Jharkhand.
               </p>
+              <p className="text-sm text-[#414844] leading-relaxed">
+                National Vice President <strong>Anand Bihari Dubey</strong>—a veteran soldier of the Indian Army, sports administrator, and district leader—embodies our commitment to bridging institutional governance with hands-on community service.
+              </p>
+              <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-[#012d1d] font-semibold">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#f0fdf4] border border-[#bbf7d0]">
+                  <Shield className="w-3.5 h-3.5 text-[#116c4a]" />
+                  <span>Indian Army Veteran Stature</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#f0fdf4] border border-[#bbf7d0]">
+                  <Award className="w-3.5 h-3.5 text-[#116c4a]" />
+                  <span>Jharkhand Boxing & Olympic Leadership</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#f0fdf4] border border-[#bbf7d0]">
+                  <Users className="w-3.5 h-3.5 text-[#116c4a]" />
+                  <span>Grassroots Public Representation</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>

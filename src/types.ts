@@ -30,3 +30,18 @@ export interface ContactMessage {
   message: string;
   createdAt: string;
 }
+
+export interface Leader {
+  id: string;
+  name: string;
+  role: string;
+  initials: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  badges?: string[];
+  bio: string;
+  phone?: string[];
+  email?: string;
+  quote?: string;
+  quoteAuthor?: string;
+}
